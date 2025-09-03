@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Planet } from "../components/planet";
+import { Planet } from "../components/Planet";
 import { Environment, Lightformer, Float } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
 import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
