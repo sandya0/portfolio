@@ -1,82 +1,83 @@
 // index.js
 export const servicesData = [
   {
-    title: "FullStack Development",
+    title: "Android Development",
     description:
-      "Your business deserves a fast, secure, and future-proof digital foundation. I develop custom web apps with clean architecture, optimized databases, and seamless integrations—ensuring reliability at every layer.",
+      "I build reliable, scalable Android applications with modern UI using Jetpack Compose and real-time features powered by Firebase and GPS integration.",
     items: [
+      {
+        title: "Native Mobile Apps",
+        description: "(Kotlin, Jetpack Compose, Material Design)",
+      },
+      {
+        title: "Realtime Features",
+        description: "(Firebase, GPS, Notifications, Cloud Firestore)",
+      },
+      {
+        title: "Map & Location Services",
+        description: "(Google Maps SDK, Custom Markers, Clustering)",
+      },
+    ],
+  },
+  {
+    title: "Web Development",
+    description:
+      "From interactive websites to admin dashboards, I design and develop responsive web platforms that are accessible and optimized for performance.",
+    items: [
+      {
+        title: "Frontend Development",
+        description: "(Vue.js, React, Tailwind CSS, Responsive UI/UX)",
+      },
       {
         title: "Backend Engineering",
-        description: "(REST/GraphQL APIs, Microservices, Auth Systems)",
+        description: "(Node.js, REST APIs, SQL/NoSQL Databases)",
       },
       {
-        title: "Frontend Excellence",
-        description: "(React, Vue, TypeScript, Interactive UI/UX)",
-      },
-      {
-        title: "Database Design",
-        description: "(SQL/NoSQL Optimization, Scalable Structures)",
+        title: "Full-Stack Projects",
+        description: "(End-to-end solutions with secure authentication)",
       },
     ],
   },
   {
-    title: "DevOps & Cloud Solutions",
+    title: "Project & Team Management",
     description:
-      "Deploying software shouldn't be a gamble. I automate infrastructure, enforce security, and leverage cloud platforms (AWS/Azure) to keep your app running smoothly—24/7, at any scale.",
+      "With leadership experience, I bring organizational skills, clear communication, and teamwork to deliver successful projects.",
     items: [
       {
-        title: "CI/CD Pipelines",
-        description: "(GitHub Actions, Docker, Kubernetes)",
+        title: "Leadership",
+        description: "(Vice President & Secretary at UESC, led 100+ members)",
       },
       {
-        title: "Server Management ",
-        description: "(Linux, Nginx, Load Balancing)",
+        title: "Collaboration",
+        description: "(Agile teamwork, cross-division coordination)",
       },
       {
-        title: "Performance Tuning",
-        description: "(Caching, Compression, Lighthouse 90+ Scores)",
+        title: "Project Planning",
+        description: "(Roadmaps, milestones, documentation, evaluations)",
       },
     ],
   },
   {
-    title: "Security & Optimization",
+    title: "UI/UX & Prototyping",
     description:
-      "Slow or hacked apps destroy trust. I harden security (XSS/SQLI protection, OAuth) and optimize bottlenecks so your app stays fast, safe, and scalable as you grow.",
+      "I bridge design and functionality with clean, user-friendly interfaces and prototypes that make apps intuitive and engaging.",
     items: [
       {
-        title: "Code Audits",
-        description: "(Refactoring, Tech Debt Cleanup)",
+        title: "UI Design",
+        description: "(Figma, Material UI, Modern Design Systems)",
       },
       {
-        title: "Pen Testing",
-        description: "(Vulnerability Assessments)",
+        title: "User Experience",
+        description: "(Accessibility, Consistency, Minimalism)",
       },
       {
-        title: "SEO Tech Stack",
-        description: "(SSR, Metadata, Structured Data)",
-      },
-    ],
-  },
-  {
-    title: "Web & Mobile Apps",
-    description:
-      "A clunky interface can sink even the best ideas. I craft responsive, pixel perfect web and mobile apps (React Native/Flutter) that users love—bridging design and functionality seamlessly.",
-    items: [
-      {
-        title: "Cross-Platform Apps",
-        description: "(Single codebase for iOS/Android/Web)",
-      },
-      {
-        title: "PWAs",
-        description: "(Offline mode, Push Notifications)",
-      },
-      {
-        title: "E-Commerce",
-        description: "(Checkout flows, Payment Gateways, Inventory APIs)",
+        title: "Prototyping",
+        description: "(Interactive flows, Rapid iteration)",
       },
     ],
   },
 ];
+
 export const projects = [
   {
     id: 1,
@@ -171,11 +172,11 @@ export const projects = [
   },
 ];
 export const socials = [
-  { name: "Instagram", href: "https://www.instagram.com/ali.sanatidev/reels/" },
-  {
-    name: "Youtube",
-    href: "https://www.youtube.com/channel/UCZhtUWTtk3bGJiMPN9T4HWA",
-  },
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/ali-sanati/" },
-  { name: "GitHub", href: "https://github.com/Ali-Sanati" },
+  { name: "Instagram", href: "https://www.instagram.com/sandya_pradayan/" },
+  // {
+  //   name: "Youtube",
+  //   href: "https://www.youtube.com/channel/UCZhtUWTtk3bGJiMPN9T4HWA",
+  // },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/sandya-pradayan-baa04b213/" },
+  { name: "GitHub", href: "https://github.com/sandya0" },
 ];

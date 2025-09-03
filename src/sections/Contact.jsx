@@ -6,10 +6,10 @@ import gsap from "gsap/all"
 const Contact = () => {
     const text = `Got a question, how or project Idea?
     we'd love to hear from you and discuss further!`
-    const items = ["Just imagin, i code", "Just imagin, i code",
-        "Just imagin, i code",
-        "Just imagin, i code",
-        "Just imagin, i code",
+    const items = ["Just imagine, i code", "Just imagine, i code",
+        "Just imagine, i code",
+        "Just imagine, i code",
+        "Just imagine, i code",
     ]
 
     useGSAP(() => {
