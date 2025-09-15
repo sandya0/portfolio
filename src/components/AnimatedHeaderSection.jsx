@@ -3,20 +3,20 @@ import { AnimatedTextLines } from "../components/AnimatedTextLines";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-const AnimatedHeaderSection = ({ 
-    subTitle, 
-    title, 
-    text, 
-    textColor, 
-    withScrollTrigger = false }) => {
+const AnimatedHeaderSection = ({
+  subTitle,
+  title,
+  text,
+  textColor,
+  withScrollTrigger = false }) => {
   const contextRef = useRef(null);
   const headerRef = useRef(null);
 
   useGSAP(() => {
     const tl = gsap.timeline({
-        scrollTrigger: withScrollTrigger ? {
-            trigger: contextRef.current,
-        }
+      scrollTrigger: withScrollTrigger ? {
+        trigger: contextRef.current,
+      }
         : undefined,
     });
     tl.from(contextRef.current, {
@@ -54,8 +54,11 @@ const AnimatedHeaderSection = ({
           </p>
           <div className="px-10">
             <h1
-              className={`flex flex-col flex-wrap gap-12 mb-3 uppercase banner-text-responsive
-              sm:gap-16 md:block ${textColor}`}
+              className={`flex flex-col gap-8 mb-3 uppercase banner-text-responsive
+                          text-4xl leading-tight
+                          sm:gap-12 sm:text-5xl
+                          md:gap-16 md:text-7xl md:block md:leading-snug
+                          lg:text-9xl lg:leading-snug ${textColor}`}
             >
               {title}
             </h1>
