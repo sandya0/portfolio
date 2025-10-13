@@ -83,6 +83,21 @@ export const servicesData = [
 export const projects = [
   {
     id: 1,
+    name: "UMN English Student Council Website",
+    description:
+      "A student organization website that showcases UESC’s divisions, activities, and events while promoting English skill development and community building at UMN.",
+    link: "https://uesc2.vercel.app/",
+    image: "/assets/projects/UESC.png",
+    bgImage: "/assets/backgrounds/curtains.jpg",
+    frameworks: [
+      { id: 1, name: "React" },
+      { id: 2, name: "Vite" },
+      { id: 3, name: "GSAP" },
+      { id: 4, name: "Tailwind CSS" },
+    ],
+  },
+  {
+    id: 2,
     name: "Bansara – Exploring the Colors of Batik",
     description:
       "A digital platform that showcases the beauty, history, and traditions of Indonesian batik through definitions, stories, interactive maps, and quizzes.",
@@ -94,21 +109,6 @@ export const projects = [
       { id: 2, name: "CSS" },
       { id: 3, name: "JavaScript" },
       
-    ],
-  },
-  {
-    id: 2,
-    name: "UMN English Student Council Website",
-    description:
-      "A student organization website that showcases UESC’s divisions, activities, and events while promoting English skill development and community building at UMN.",
-    link: "https://uesc-alpha.vercel.app/",
-    image: "/assets/projects/UESC.png",
-    bgImage: "/assets/backgrounds/curtains.jpg",
-    frameworks: [
-      { id: 1, name: "React" },
-      { id: 2, name: "Vite" },
-      { id: 3, name: "GSAP" },
-      { id: 4, name: "Tailwind CSS" },
     ],
   },
   {
