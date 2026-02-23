@@ -8,13 +8,14 @@ const Marquee = ({ items, className = "text-white bg-black",
     icon = "mdi:star-four-points",
     iconClassName = "",
     reverse = false,
+    ready = true,
 }) => {
     const containerRef = useRef(null);
     const itemsRef = useRef([]);
     const tlRef = useRef(null);
     const observerRef = useRef(null);
-    const resizeObserverRef = useRef(null);
     const initializedRef = useRef(false);
+    const pollRef = useRef(null);
 
     function horizontalLoop(items, config) {
         items = gsap.utils.toArray(items);
@@ -75,27 +76,34 @@ const Marquee = ({ items, className = "text-white bg-black",
     }
 
     const cleanup = () => {
+        if (pollRef.current) {
+            clearInterval(pollRef.current);
+            pollRef.current = null;
+        }
         tlRef.current?.kill();
         observerRef.current?.kill();
-        resizeObserverRef.current?.disconnect();
         tlRef.current = null;
         observerRef.current = null;
         initializedRef.current = false;
     };
 
-    const initLoop = () => {
+    const hasStableDimensions = () => {
         const els = itemsRef.current.filter(Boolean);
-
-        // All elements must exist and have real painted widths
         if (!els.length || els.length !== items.length) return false;
-        if (els.some(el => el.offsetWidth === 0 || el.offsetLeft === 0 && els.indexOf(el) !== 0)) return false;
+        // Every element must have a real width
+        if (els.some(el => el.offsetWidth === 0)) return false;
+        // Elements after the first must have increasing offsetLeft (laid out horizontally)
+        for (let i = 1; i < els.length; i++) {
+            if (els[i].offsetLeft <= els[i - 1].offsetLeft) return false;
+        }
+        return true;
+    };
 
-        // Prevent re-initializing if already running
-        if (initializedRef.current) return true;
+    const initLoop = () => {
+        if (initializedRef.current) return;
         initializedRef.current = true;
 
-        tlRef.current?.kill();
-        observerRef.current?.kill();
+        const els = itemsRef.current.filter(Boolean);
 
         tlRef.current = horizontalLoop(els, {
             repeat: -1,
@@ -114,34 +122,37 @@ const Marquee = ({ items, className = "text-white bg-black",
                     .to(tlRef.current, { timeScale: factor / 2.5, duration: 1 }, "+=0.3");
             }
         });
-
-        return true;
     };
 
     useEffect(() => {
+        if (!ready) return;
         cleanup();
 
-        const els = itemsRef.current.filter(Boolean);
-        if (!els.length) return;
+        // If dimensions are already good (e.g. hot reload, cached assets), init immediately
+        if (hasStableDimensions()) {
+            initLoop();
+            return cleanup;
+        }
 
-        // Try immediately first
-        if (initLoop()) return cleanup;
-
-        // Watch the container — fires when it gets real dimensions after font/icon load
-        resizeObserverRef.current = new ResizeObserver(() => {
-            if (initLoop()) {
-                // Once initialized, stop watching
-                resizeObserverRef.current?.disconnect();
+        // Otherwise poll every 50ms until elements are fully painted and laid out.
+        // This handles slow icon/font network fetches in production.
+        // Gives up after 5 seconds to avoid infinite polling.
+        let elapsed = 0;
+        pollRef.current = setInterval(() => {
+            elapsed += 50;
+            if (hasStableDimensions()) {
+                clearInterval(pollRef.current);
+                pollRef.current = null;
+                initLoop();
+            } else if (elapsed >= 5000) {
+                clearInterval(pollRef.current);
+                pollRef.current = null;
+                console.warn("Marquee: elements never reached stable dimensions");
             }
-        });
-
-        resizeObserverRef.current.observe(containerRef.current);
-
-        // Also watch each item individually since icon load can change their widths
-        els.forEach(el => resizeObserverRef.current.observe(el));
+        }, 50);
 
         return cleanup;
-    }, [items, reverse]);
+    }, [items, reverse, ready]);
 
     return (
         <div
