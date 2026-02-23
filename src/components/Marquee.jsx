@@ -13,6 +13,8 @@ const Marquee = ({ items, className = "text-white bg-black",
     const itemsRef = useRef([]);
     const tlRef = useRef(null);
     const observerRef = useRef(null);
+    const resizeObserverRef = useRef(null);
+    const initializedRef = useRef(false);
 
     function horizontalLoop(items, config) {
         items = gsap.utils.toArray(items);
@@ -72,12 +74,26 @@ const Marquee = ({ items, className = "text-white bg-black",
         return tl;
     }
 
-    const initLoop = () => {
-        // Validate that all elements have real dimensions before initializing
-        const els = itemsRef.current.filter(Boolean);
-        if (!els.length || els.some(el => el.offsetWidth === 0)) return false;
+    const cleanup = () => {
+        tlRef.current?.kill();
+        observerRef.current?.kill();
+        resizeObserverRef.current?.disconnect();
+        tlRef.current = null;
+        observerRef.current = null;
+        initializedRef.current = false;
+    };
 
-        // Kill previous instances
+    const initLoop = () => {
+        const els = itemsRef.current.filter(Boolean);
+
+        // All elements must exist and have real painted widths
+        if (!els.length || els.length !== items.length) return false;
+        if (els.some(el => el.offsetWidth === 0 || el.offsetLeft === 0 && els.indexOf(el) !== 0)) return false;
+
+        // Prevent re-initializing if already running
+        if (initializedRef.current) return true;
+        initializedRef.current = true;
+
         tlRef.current?.kill();
         observerRef.current?.kill();
 
@@ -103,25 +119,28 @@ const Marquee = ({ items, className = "text-white bg-black",
     };
 
     useEffect(() => {
-        // Attempt 1: after a tick, most layouts are done
-        const rafId = requestAnimationFrame(() => {
-            if (initLoop()) return;
+        cleanup();
 
-            // Attempt 2: if elements still have no width, wait for fonts via document.fonts
-            document.fonts.ready.then(() => {
-                if (initLoop()) return;
+        const els = itemsRef.current.filter(Boolean);
+        if (!els.length) return;
 
-                // Attempt 3: last resort — small timeout for edge cases (e.g. nested lazy renders)
-                const t = setTimeout(initLoop, 150);
-                return () => clearTimeout(t);
-            });
+        // Try immediately first
+        if (initLoop()) return cleanup;
+
+        // Watch the container — fires when it gets real dimensions after font/icon load
+        resizeObserverRef.current = new ResizeObserver(() => {
+            if (initLoop()) {
+                // Once initialized, stop watching
+                resizeObserverRef.current?.disconnect();
+            }
         });
 
-        return () => {
-            cancelAnimationFrame(rafId);
-            tlRef.current?.kill();
-            observerRef.current?.kill();
-        };
+        resizeObserverRef.current.observe(containerRef.current);
+
+        // Also watch each item individually since icon load can change their widths
+        els.forEach(el => resizeObserverRef.current.observe(el));
+
+        return cleanup;
     }, [items, reverse]);
 
     return (
