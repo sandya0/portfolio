@@ -83,6 +83,21 @@ export const servicesData = [
 export const projects = [
   {
     id: 1,
+    name: "Hollo Studio - Web Design Studio",
+    description:
+      "A digital web design studio built with an end-to-end design system, showcasing a bold, minimalist aesthetic with high-performance animations.",
+    link: "https://hollostudio.site",
+    image: "/assets/projects/Hollostudio.png",
+    bgImage: "/assets/backgrounds/blanket.jpg",
+    frameworks: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Tailwind CSS" },
+      { id: 3, name: "GSAP" },
+      { id: 4, name: "JavaScript" },
+    ],
+  },
+  {
+    id: 2,
     name: "UMN English Student Council Website",
     description:
       "A student organization website that showcases UESC’s divisions, activities, and events while promoting English skill development and community building at UMN.",
@@ -90,14 +105,29 @@ export const projects = [
     image: "/assets/projects/UESC.png",
     bgImage: "/assets/backgrounds/curtains.jpg",
     frameworks: [
-      { id: 1, name: "React" },
-      { id: 2, name: "Vite" },
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Tailwind CSS" },
       { id: 3, name: "GSAP" },
-      { id: 4, name: "Tailwind CSS" },
+      { id: 4, name: "JavaScript" },
     ],
   },
   {
-    id: 2,
+    id: 3,
+    name: "Steric Spes - Architectural Showcase",
+    description:
+      "A bold, clean layout with large text and a custom grid to highlight the building's architecture, featuring smooth scrolling, custom loading screens, and interactive animations to give the site a high-end feel.",
+    link: "https://your-steric-spes-link-here.com", // TODO: Update this link
+    image: "/assets/projects/Architecture.png",
+    bgImage: "/assets/backgrounds/table.jpg",
+    frameworks: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Tailwind CSS" },
+      { id: 3, name: "GSAP" },
+      { id: 4, name: "JavaScript" },
+    ],
+  },
+  {
+    id: 4,
     name: "Bansara – Exploring the Colors of Batik",
     description:
       "A digital platform that showcases the beauty, history, and traditions of Indonesian batik through definitions, stories, interactive maps, and quizzes.",
@@ -108,22 +138,6 @@ export const projects = [
       { id: 1, name: "HTML" },
       { id: 2, name: "CSS" },
       { id: 3, name: "JavaScript" },
-      
-    ],
-  },
-  {
-    id: 3,
-    name: "Velvet Pour Website",
-    description:
-      "A stylish cocktail bar website featuring signature drinks, mocktails, recipes, and bar details to showcase Velvet Pour’s craft and atmosphere.",
-    link: "https://project-cocktails.vercel.app/",
-    image: "/assets/projects/Cocktails.png",
-    bgImage: "/assets/backgrounds/map.jpg",
-    frameworks: [
-      { id: 1, name: "React" },
-      { id: 2, name: "Vite" },
-      { id: 3, name: "GSAP" },
-      { id: 4, name: "Tailwind CSS" },
     ],
   },
   // {
